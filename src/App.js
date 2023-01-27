@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useReducer, useEffect } from "react";
+import "./App.css";
+import Form from "./components/Form";
+import ToDoList from "./components/ToDoList";
+import reducer from "./components/reducer";
 
 function App() {
+  const [state, dispatch] = useReducer(
+    reducer,
+    JSON.parse(localStorage.getItem("todos"))
+  );
+  const [inputText, setInputText] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(state));
+  }, [state]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <h1>ToDo List</h1>
       </header>
+      <Form
+        inputText={inputText}
+        state={state}
+        dispatch={dispatch}
+        setInputText={setInputText}
+      />
+      <ToDoList dispatch={dispatch} todos={state} save={setInputText}/>
     </div>
   );
 }
