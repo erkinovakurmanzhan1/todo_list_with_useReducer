@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/todo_list_with_useReducer/static/css/main.6a85bfbe.css",
+    "main.js": "/todo_list_with_useReducer/static/js/main.14cd7979.js",
+    "index.html": "/todo_list_with_useReducer/index.html",
+    "main.6a85bfbe.css.map": "/todo_list_with_useReducer/static/css/main.6a85bfbe.css.map",
+    "main.14cd7979.js.map": "/todo_list_with_useReducer/static/js/main.14cd7979.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6a85bfbe.css",
+    "static/js/main.14cd7979.js"
+  ]
+}
