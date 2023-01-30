@@ -1,12 +1,17 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { TodoContext } from "../store/TodoContext";
 
-const Form = ({ inputText, setInputText, dispatch }) => {
+const Form = () => {
+  const { dispatch, setInputText, inputText } = useContext(TodoContext);
+
   const inputTextHandler = (e) => {
     setInputText(e.target.value);
   };
 
   const submitTodoHandler = (e) => {
     e.preventDefault();
+
     dispatch({
       type: "add",
       payload: inputText,
@@ -16,7 +21,11 @@ const Form = ({ inputText, setInputText, dispatch }) => {
   };
   return (
     <form>
-      <StyledInput value={inputText} onChange={inputTextHandler} type="text" />
+      <StyledInput
+        value={inputText}
+        onChange={inputTextHandler}
+        type="text"
+      />
 
       <ButtonAdd
         onClick={submitTodoHandler}

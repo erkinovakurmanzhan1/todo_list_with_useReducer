@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import "./Todo.css";
+import { TodoContext } from "../store/TodoContext";
 
-const Todo = ({ text, todo, dispatch,  save }) => {
+const Todo = ({ todo, text }) => {
+  const { dispatch, setInputText } = useContext(TodoContext);
   const deleteHandler = () => {
     dispatch({
       type: "delete",
@@ -17,15 +18,18 @@ const Todo = ({ text, todo, dispatch,  save }) => {
     });
   };
 
-  const editHandler = (text,id) => {
-    save(text);
+  const editHandler = (text, id) => {
+
+    setInputText(text);
     deleteHandler(id);
   };
+
+
   return (
     <StyledDivTodo>
-      <li className={`todoItem ${todo.completed ? "completed" : ""}`}>
+      <StyleLi className={`${todo.completed && "todo" }`}>
         {text}
-      </li>
+      </StyleLi>
       <Container>
         <CompleteBtn onClick={compliteHandler}>
           <StyledIBtn>
@@ -33,7 +37,7 @@ const Todo = ({ text, todo, dispatch,  save }) => {
           </StyledIBtn>
         </CompleteBtn>
 
-        <StyleEdit onClick={() => editHandler(text, todo.id)}>
+        <StyleEdit onClick={() => editHandler(todo.text, todo.id)}>
           <b>✎</b>
         </StyleEdit>
         <TrashBtn onClick={deleteHandler}>
@@ -46,6 +50,22 @@ const Todo = ({ text, todo, dispatch,  save }) => {
 
 export default Todo;
 
+const StyleLi = styled.li`
+  padding: 0rem 0.5rem;
+      list-style: none;
+    padding: 0rem 0.5rem;
+    display: flex;
+    width: 100%;
+    font-size: 40px;
+    font-style: italic;
+    font-weight: 900;
+    color: rgb(195, 111, 125);
+    &.todo{
+      text-decoration: line-through;
+    opacity: 0.5;
+  }
+`
+
 const StyledDivTodo = styled.div`
   background: #98e9e9;
   border-radius: 30px;
@@ -56,7 +76,6 @@ const StyledDivTodo = styled.div`
   width: 65%;
   margin: 20px auto;
   transition: all 1s ease;
-  /* border: 1px solid  grey; */
   padding: 5px;
 
   &:hover {

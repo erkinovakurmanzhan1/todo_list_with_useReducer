@@ -1,19 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TodoContext } from "../store/TodoContext";
 import Todo from "./Todo";
 
-const ToDoList = ({ todos,dispatch,save}) => {
-    return (
+const ToDoList = () => {
+  const { state } = useContext(TodoContext);
+  return (
     <div>
       <ul>
-        {todos.map((todo) => {
-          return( <Todo
-            dispatch={dispatch}
-              todo={todo}
-              text={todo.text}
-              save={save}
-              key={todo.id}
-            />)
-})}
+        {state.map((todo) => {
+          return (
+            <Todo todo={todo} text={todo.text}  key={todo.id} />
+          );
+        })}
       </ul>
     </div>
   );
